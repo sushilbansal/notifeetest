@@ -49,8 +49,8 @@ export const NotificationBackgroundHandler = () => {
     if (Platform.OS === 'android') {
       data = {
         ...message.data,
-        title: message.title,
-        body: message.body,
+        // title: message.notification.title,
+        // body: message.notification.body,
       };
     } else {
       data = {
