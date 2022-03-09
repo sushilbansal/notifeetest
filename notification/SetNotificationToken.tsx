@@ -1,6 +1,3 @@
-import React, { useEffect } from 'react';
-import { View } from 'react-native';
-
 import messaging from '@react-native-firebase/messaging';
 
 export const SetNotificationToken = () => {
@@ -28,9 +25,5 @@ export const SetNotificationToken = () => {
     }
   }
 
-  useEffect(() => {
-    requestNotificationPermission();
-  }, []);
-
-  return <View />;
+  requestNotificationPermission();
 };

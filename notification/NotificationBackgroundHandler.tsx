@@ -47,9 +47,17 @@ export const NotificationBackgroundHandler = () => {
     console.log(' ----- ---- onMessageReceived -----', message);
     let data;
     if (Platform.OS === 'android') {
-      data = message.data;
+      data = {
+        ...message.data,
+        title: message.title,
+        body: message.body,
+      };
     } else {
-      data = message.data.notifee_options.data;
+      data = {
+        ...message.data.notifee_options.data,
+        title: message.data.notifee_options.title,
+        body: message.data.notifee_options.body,
+      };
     }
 
     await sendNotification({
@@ -57,9 +65,5 @@ export const NotificationBackgroundHandler = () => {
     });
   };
 
-  useEffect(() => {
-    console.log('-------- useEffect  setBackgroundMessageHandler ---------');
-    messaging().setBackgroundMessageHandler(onMessageReceived);
-  }, []);
-  return <View />;
+  messaging().setBackgroundMessageHandler(onMessageReceived);
 };

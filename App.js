@@ -10,18 +10,9 @@ import React, {useEffect} from 'react';
 import {SafeAreaView, ScrollView, Text, View} from 'react-native';
 import notifee, {EventType} from '@notifee/react-native';
 
-import {AppFake} from './AppFake';
 import {NotificationBackgroundHandler} from './notification/NotificationBackgroundHandler';
 import {NotificationSubscription} from './notification/NotificationSubscription';
 import {SetNotificationToken} from './notification/SetNotificationToken';
-
-export default function HeadlessCheck({isHeadless}) {
-  if (isHeadless) {
-    // App has been launched in the background by iOS, ignore
-    return <AppFake />;
-  }
-  return <App />;
-}
 
 const App = () => {
   useEffect(() => {
@@ -51,10 +42,11 @@ const App = () => {
     };
   }, []);
 
+  SetNotificationToken();
+  NotificationBackgroundHandler();
+
   return (
     <>
-      <SetNotificationToken />
-      <NotificationBackgroundHandler />
       <NotificationSubscription />
       <SafeAreaView>
         <ScrollView contentInsetAdjustmentBehavior="automatic">
@@ -66,3 +58,5 @@ const App = () => {
     </>
   );
 };
+
+export default App;
